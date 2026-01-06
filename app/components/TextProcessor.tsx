@@ -86,8 +86,16 @@ export default function TextProcessor({ isDark }: TextProcessorProps) {
           </Button>
 
           {/* Дополнительные функции */}
-          {showAdditional && (
-            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 transition-opacity duration-300 opacity-100">
+          <div
+            className={`
+              overflow-hidden transition-all duration-300 ease-in-out
+              ${showAdditional
+                ? 'max-h-[500px] opacity-100 translate-y-0'
+                : 'max-h-0 opacity-0 -translate-y-2'
+              }
+            `}
+          >
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 pt-2">
               {additionalModes.map((mode) => (
                 <Button
                   key={mode}
@@ -100,7 +108,7 @@ export default function TextProcessor({ isDark }: TextProcessorProps) {
                 </Button>
               ))}
             </div>
-          )}
+          </div>
         </div>
 
  

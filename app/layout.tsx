@@ -14,15 +14,15 @@ export const metadata: Metadata = {
     telephone: false,
   },
   // Icons are optional - will be added when PNG files are generated
-  // icons: {
-  //   icon: [
-  //     { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-  //     { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
-  //   ],
-  //   apple: [
-  //     { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
-  //   ],
-  // },
+  icons: {
+    icon: [
+      { url: '/192icon.svg', sizes: '192x192', type: 'image/svg' },
+      { url: '/512icon.svg', sizes: '512x512', type: 'image/svg' },
+    ],
+    apple: [
+      { url: '/192icon.svg', sizes: '192x192', type: 'image/svg' },
+    ],
+  },
 };
 
 export const viewport: Viewport = {

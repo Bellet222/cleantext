@@ -39,9 +39,12 @@ export default function Button({
       }
     `,
     gradient: `
-      px-6 py-2 rounded-lg font-medium bg-gradient-to-r from-purple-500 to-pink-500 text-white
-      hover:from-purple-600 hover:to-pink-600 shadow-lg shadow-purple-500/30 hover:shadow-purple-500/50
-    `,
+  px-6 py-2 rounded-lg font-medium text-white
+  bg-gradient-to-r from-cyan-500 to-blue-600
+  hover:from-cyan-400 hover:to-blue-700
+  shadow-lg shadow-cyan-500/20 hover:shadow-blue-500/30
+`,
+
     icon: `
       w-10 h-10 rounded-lg flex items-center justify-center text-2xl
       ${isDark
