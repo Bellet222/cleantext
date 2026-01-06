@@ -13,9 +13,28 @@ interface PWAInstallButtonProps {
 export default function PWAInstallButton({ isDark, variant = 'header', className = '' }: PWAInstallButtonProps) {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
+  const [isIOS, setIsIOS] = useState(false);
+  const [isStandalone, setIsStandalone] = useState(false);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    const isStandaloneMode = window.matchMedia('(display-mode: standalone)').matches || 
+                            (window.navigator as any).standalone === true;
+
+    setIsIOS(isIOSDevice);
+    setIsStandalone(isStandaloneMode);
+
+    if (isStandaloneMode) {
+      setShowInstallButton(false);
+      return;
+    }
+
+    if (isIOSDevice) {
+      setShowInstallButton(true);
+      return;
+    }
 
     const handler = (e: Event) => {
       e.preventDefault();
@@ -25,16 +44,17 @@ export default function PWAInstallButton({ isDark, variant = 'header', className
 
     window.addEventListener('beforeinstallprompt', handler);
 
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      setShowInstallButton(false);
-    }
-
     return () => {
       window.removeEventListener('beforeinstallprompt', handler);
     };
   }, []);
 
   const handleInstallClick = async () => {
+    if (isIOS) {
+      alert('Для установки приложения на iPhone:\n\n1. Нажмите кнопку "Поделиться" (квадрат со стрелкой вверх)\n2. Прокрутите вниз и выберите "На экран Домой"\n3. Нажмите "Добавить"');
+      return;
+    }
+
     if (!deferredPrompt) return;
 
     deferredPrompt.prompt();
@@ -56,7 +76,7 @@ export default function PWAInstallButton({ isDark, variant = 'header', className
         isDark={isDark}
         variant="icon"
         className={`w-8 h-8 sm:w-10 sm:h-10 ${className}`}
-        title="Установить приложение"
+        title={isIOS ? "Инструкция по установке на iPhone" : "Установить приложение"}
       >
         <Download 
           size={18} 
@@ -77,8 +97,9 @@ export default function PWAInstallButton({ isDark, variant = 'header', className
       } ${className}`}
     >
       <Download size={18} />
-      <span className="text-sm sm:text-base">Установить приложение</span>
+      <span className="text-sm sm:text-base">
+        {isIOS ? 'Как установить на iPhone' : 'Установить приложение'}
+      </span>
     </button>
   );
 }
-
