@@ -16,7 +16,6 @@ export default function PWAInstaller() {
 
     window.addEventListener('beforeinstallprompt', handler);
 
-    // Проверяем, не установлено ли уже приложение
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setShowInstallButton(false);
     }
@@ -44,7 +43,7 @@ export default function PWAInstaller() {
   return (
     <button
       onClick={handleInstallClick}
-      className="fixed bottom-4 right-4 z-50 px-4 py-3 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-medium shadow-lg hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2"
+      className="fixed bottom-4 right-4 z-50 px-4 py-3 rounded-lg bg-linear-to-r from-cyan-500 to-blue-500 text-white font-medium shadow-lg hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 flex items-center gap-2"
     >
       <Download size={20} />
       <span className="hidden sm:inline">Установить приложение</span>

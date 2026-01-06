@@ -10,6 +10,7 @@ interface ButtonProps {
   variant?: 'default' | 'active' | 'gradient' | 'icon' | 'divider';
   className?: string;
   type?: 'button' | 'submit' | 'reset';
+  title?: string;
 }
 
 export default function Button({
@@ -20,6 +21,7 @@ export default function Button({
   variant = 'default',
   className = '',
   type = 'button',
+  title,
 }: ButtonProps) {
   const baseClasses = 'transition-all duration-300 cursor-pointer';
   
@@ -40,7 +42,7 @@ export default function Button({
     `,
     gradient: `
   px-6 py-2 rounded-lg font-medium text-white
-  bg-gradient-to-r from-cyan-500 to-blue-600
+  bg-linear-to-r from-cyan-500 to-blue-600
   hover:from-cyan-400 hover:to-blue-700
   shadow-lg shadow-cyan-500/20 hover:shadow-blue-500/30
 `,
@@ -75,6 +77,7 @@ export default function Button({
         onClick={onClick}
         disabled={disabled}
         className={combinedClasses}
+        title={title}
       >
         {children}
       </button>
@@ -87,6 +90,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={combinedClasses}
+      title={title}
     >
       {children}
     </button>

@@ -8,6 +8,8 @@ import Button from './Button';
 
 interface TextProcessorProps {
   isDark: boolean;
+  initialMode?: TextMode;
+  hideModeSelector?: boolean;
 }
 
 const mainModes: TextMode[] = [
@@ -28,9 +30,9 @@ const additionalModes: TextMode[] = [
   'replace-large-spaces-with-small',
 ];
 
-export default function TextProcessor({ isDark }: TextProcessorProps) {
+export default function TextProcessor({ isDark, initialMode, hideModeSelector = false }: TextProcessorProps) {
   const [inputText, setInputText] = useState('');
-  const [selectedMode, setSelectedMode] = useState<TextMode>('remove-extra-spaces');
+  const [selectedMode, setSelectedMode] = useState<TextMode>(initialMode || 'remove-extra-spaces');
   const [showAdditional, setShowAdditional] = useState(false);
 
   const processedText = useMemo(() => {
@@ -46,6 +48,7 @@ export default function TextProcessor({ isDark }: TextProcessorProps) {
     <div className={`w-full max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8 ${bgClass}`}>
       <div className="space-y-4 sm:space-y-6">
         {/* Режимы обработки */}
+        {!hideModeSelector && (
         <div className="space-y-4 sm:space-y-6">
           <h2 className={`text-base sm:text-lg font-semibold text-center ${isDark ? 'text-gray-200' : 'text-gray-700'}`}>
             Основные функции:
@@ -110,6 +113,7 @@ export default function TextProcessor({ isDark }: TextProcessorProps) {
             </div>
           </div>
         </div>
+        )}
 
  
         {/* Входной текст */}
@@ -133,6 +137,7 @@ export default function TextProcessor({ isDark }: TextProcessorProps) {
         </div>
 
        {/* Выбранный режим */}
+       {!hideModeSelector && (
        <div className={`
           p-3 sm:p-4 rounded-lg border-2
           ${isDark
@@ -143,6 +148,7 @@ export default function TextProcessor({ isDark }: TextProcessorProps) {
           <p className="text-xs sm:text-sm font-medium mb-1">Выбранный режим:</p>
           <p className="text-sm sm:text-base font-semibold">{textModes[selectedMode]}</p>
         </div>
+       )}
 
         {/* Результат */}
         <div>

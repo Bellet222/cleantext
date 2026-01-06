@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   formatDetection: {
     telephone: false,
   },
-  // Icons are optional - will be added when PNG files are generated
   icons: {
     icon: [
       { url: '/192icon.svg', sizes: '192x192', type: 'image/svg' },
